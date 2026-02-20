@@ -10,12 +10,14 @@ __pycache__/
 # We ignore the actual data so every dev (or server) builds their own 
 # or pulls from a secure source.
 db/
-chroma_db/
+chroma_db*/
 
 # Data Files
 # Usually, you don't want to push the actual PDFs to GitHub
 data/*.pdf
 data/*.docx
+*.pdf
+*.docx
 
 # IDEs
 .vscode/
