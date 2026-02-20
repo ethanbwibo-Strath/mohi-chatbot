@@ -4,8 +4,10 @@ from app.services.chatbot import get_rafiki_answer
 
 app = FastAPI(title="MOHI Rafiki IT Chatbot")
 
+# Define the request model ONLY ONCE
 class ChatRequest(BaseModel):
     message: str
+    history: list = []
 
 @app.get("/")
 def health_check():
@@ -13,16 +15,6 @@ def health_check():
 
 @app.post("/chat")
 async def chat_with_rafiki(request: ChatRequest):
-    # This calls the chatbot service we just tested
-    answer = get_rafiki_answer(request.message)
-    return {"response": answer}
-
-class ChatRequest(BaseModel):
-    message: str
-    history: list = []
-
-@app.post("/chat")
-async def chat_with_rafiki(request: ChatRequest):
-    # Pass both the message and the history to the service
-    answer = get_rafiki_answer(request.message, request.history)
+    # This calls the service with BOTH the message and the history
+    answer = get_rafiki_answer(request.message, chat_history=request.history)
     return {"response": answer}
