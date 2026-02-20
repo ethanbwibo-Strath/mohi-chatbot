@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_chroma import Chroma
 from langchain_classic.chains import RetrievalQA
-from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 
 load_dotenv()
 
@@ -24,9 +24,8 @@ def get_rafiki_answer(query: str):
     
     GUIDELINES:
     1. If the answer is in the context, explain it clearly and warmly.
-    2. If a staff member is stressed (e.g., they mentioned being sick or overwhelmed), acknowledge it with empathy first before giving technical advice.
-    3. If you don't know the answer, don't make it up. Suggest they contact the I.T. department at Pangani.
-    4. Keep your tone professional yet brotherly.
+    2. If you don't know the answer, don't make it up. Suggest they contact the I.T. department at Pangani.
+    3. Keep your tone professional yet brotherly.
 
     CONTEXT: {context}
     

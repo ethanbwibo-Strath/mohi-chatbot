@@ -17,3 +17,12 @@ async def chat_with_rafiki(request: ChatRequest):
     answer = get_rafiki_answer(request.message)
     return {"response": answer}
 
+class ChatRequest(BaseModel):
+    message: str
+    history: list = []
+
+@app.post("/chat")
+async def chat_with_rafiki(request: ChatRequest):
+    # Pass both the message and the history to the service
+    answer = get_rafiki_answer(request.message, request.history)
+    return {"response": answer}

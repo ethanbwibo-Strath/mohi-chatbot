@@ -26,10 +26,16 @@ if prompt := st.chat_input("How can I help you today?"):
     with st.chat_message("assistant"):
         with st.spinner("Rafiki is thinking..."):
             try:
-                # We send the prompt to your FastAPI /chat endpoint
+                # Prepare the history to send to the backend
+                # We send the existing messages so the bot has 'memory'
+                chat_history = st.session_state.messages 
+
                 response = requests.post(
                     "http://127.0.0.1:8000/chat", 
-                    json={"message": prompt}
+                    json={
+                        "message": prompt,
+                        "history": chat_history
+                    }
                 )
                 
                 if response.status_code == 200:
@@ -39,4 +45,4 @@ if prompt := st.chat_input("How can I help you today?"):
                 else:
                     st.error("I'm having trouble connecting to the brain.")
             except Exception as e:
-                st.error(f"Connection Error: Ensure the FastAPI server is running.")
+                st.error(f"Connection Error: {e}")
