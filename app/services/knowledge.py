@@ -26,7 +26,7 @@ def run_ingestion():
     chunks = text_splitter.split_documents(docs)
     
     # 3. Initialize Google Embeddings
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
+    embeddings = GoogleGenerativeAIEmbeddings(model="text-embedding-005")
     
     # 4. Create and persist the Vector Store
     print(f"🧠 Vectorizing {len(chunks)} chunks into ChromaDB...")
