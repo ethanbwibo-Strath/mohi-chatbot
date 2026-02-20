@@ -1,9 +1,9 @@
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-# NEW
 from langchain_chroma import Chroma
 from langchain_classic.chains import RetrievalQA
+from langchain.prompts import PromptTemplate
 
 load_dotenv()
 
@@ -18,12 +18,32 @@ def get_rafiki_answer(query: str):
     # Using gpt-4o-mini is much cheaper than gpt-4o and perfect for this
     llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
     
+# Define the Personality/Directives
+    template = """You are Rafiki, the friendly and supportive I.T. Assistant for Missions of Hope International (MOHI).
+    Your goal is to help staff with technical issues while reflecting MOHI's values of grace and holistic ministry.
+    
+    GUIDELINES:
+    1. If the answer is in the context, explain it clearly and warmly.
+    2. If a staff member is stressed (e.g., they mentioned being sick or overwhelmed), acknowledge it with empathy first before giving technical advice.
+    3. If you don't know the answer, don't make it up. Suggest they contact the I.T. department at Pangani.
+    4. Keep your tone professional yet brotherly.
+
+    CONTEXT: {context}
+    
+    STAFF MEMBER: {question}
+    RAFIKI:"""
+
+    RAFIKI_PROMPT = PromptTemplate(
+        template=template, input_variables=["context", "question"]
+    )
+
     # 3. Create the Retrieval Chain
     # This chain handles: Searching DB -> Finding Chunks -> Giving them to GPT -> Getting Answer
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff", # "Stuffs" all found chunks into one prompt
-        retriever=vector_db.as_retriever(search_kwargs={"k": 3}) # Get top 3 chunks
+        retriever=vector_db.as_retriever(search_kwargs={"k": 5}), # Get top 5 chunks
+        chain_type_kwargs={"prompt": RAFIKI_PROMPT}
     )
     
     # 4. Run the query
