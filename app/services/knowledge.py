@@ -34,7 +34,7 @@ def run_ingestion():
     print(f"🧠 Vectorizing {len(chunks)} chunks into ChromaDB...")
     
     # 4. Batching Logic to stay under Free Tier Rate Limits (preventing 429 errors)
-    batch_size = 5  # Processing 5 chunks at a time
+    batch_size = 100  # Processing 100 chunks at a time
     vector_db = None
 
     for i in range(0, len(chunks), batch_size):
