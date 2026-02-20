@@ -16,3 +16,4 @@ async def chat_with_rafiki(request: ChatRequest):
     # This calls the chatbot service we just tested
     answer = get_rafiki_answer(request.message)
     return {"response": answer}
+
