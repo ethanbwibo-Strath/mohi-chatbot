@@ -55,7 +55,7 @@ if prompt:
         with st.spinner("Rafiki is consulting the MOHI knowledge base..."):
             try:
                 response = requests.post(
-                    "http://127.0.0.1:8000/chat", 
+                    "http://127.0.0.1:8080/chat", 
                     json={"message": prompt, "history": st.session_state.messages},
                     timeout=30
                 )
