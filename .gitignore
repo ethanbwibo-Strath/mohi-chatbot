@@ -21,4 +21,7 @@ data/*.docx
 
 # IDEs
 .vscode/
-.idea/
+.idea/-e 
+# Environment files
+*.env
+*.env.*
