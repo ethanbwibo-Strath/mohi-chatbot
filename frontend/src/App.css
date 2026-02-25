@@ -3,3 +3,17 @@
 .App {
   min-height: 100vh;
 }
+
+.markdown-content p {
+    margin-bottom: 8px;
+}
+.markdown-content p:last-child {
+    margin-bottom: 0;
+}
+.markdown-content strong {
+    font-weight: 700;
+}
+.markdown-content ul {
+    padding-left: 20px;
+    margin-top: 5px;
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { MessageCircle, X, Send, Sun, Moon, MapPin, Lock, FileText, ChevronDown } from 'lucide-react';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
@@ -50,7 +51,9 @@ const MessageBubble = ({ message, isUser, isDark }) => (
           : 'bg-mohi-deep-blue text-white rounded-bl-md'
       }`}
     >
-      <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
+      <div className="text-sm leading-relaxed markdown-content">
+        <ReactMarkdown>{message.content}</ReactMarkdown>
+      </div>
     </div>
   </div>
 );
