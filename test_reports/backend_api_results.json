@@ -1,88 +1,116 @@
 {
-  "timestamp": "2026-02-25T07:18:27.020017",
+  "timestamp": "2026-02-25T07:18:35.746370",
   "total_tests": 10,
-  "passed_tests": 1,
-  "success_rate": 10.0,
+  "passed_tests": 10,
+  "success_rate": 100.0,
   "test_results": [
     {
       "name": "Root Health Check",
       "endpoint": "",
       "method": "GET",
       "expected_status": 200,
-      "actual_status": 404,
-      "success": false,
-      "response_time": 0.223265,
-      "error": null
+      "actual_status": 200,
+      "success": true,
+      "response_time": 0.002702,
+      "error": null,
+      "response_data": {
+        "status": "online",
+        "service": "Rafiki IT Backend",
+        "chatbot_mode": "builtin"
+      }
     },
     {
       "name": "API Health Check",
       "endpoint": "api/health",
       "method": "GET",
       "expected_status": 200,
-      "actual_status": 404,
-      "success": false,
-      "response_time": 0.15028,
-      "error": null
+      "actual_status": 200,
+      "success": true,
+      "response_time": 0.001445,
+      "error": null,
+      "response_data": {
+        "status": "online",
+        "service": "Rafiki IT Backend",
+        "chatbot_mode": "builtin"
+      }
     },
     {
       "name": "Simple Chat Message",
       "endpoint": "api/chat",
       "method": "POST",
       "expected_status": 200,
-      "actual_status": 404,
-      "success": false,
-      "response_time": 0.095733,
-      "error": null
+      "actual_status": 200,
+      "success": true,
+      "response_time": 0.002532,
+      "error": null,
+      "response_data": {
+        "response": "Thank you for reaching out! I'm Rafiki, your friendly IT assistant for MOHI.\n\nI'm currently in **limited mode**, but I can still help guide you! Here are some quick options:\n\n\u2022 **IT Office Location** - Our team is at Pangani (Ext 303/304)\n\u2022 **Portal Issues** - Contact IT for password resets\n\u2022 **Leave Applications** - Use Employee > Leave in the portal\n\nFor complex technical issues, please contact the IT department directly. May God bless your work today! \ud83d\ude4f"
+      }
     },
     {
       "name": "Chat with History",
       "endpoint": "api/chat",
       "method": "POST",
       "expected_status": 200,
-      "actual_status": 404,
-      "success": false,
-      "response_time": 0.098766,
-      "error": null
+      "actual_status": 200,
+      "success": true,
+      "response_time": 0.001685,
+      "error": null,
+      "response_data": {
+        "response": "Thank you for reaching out! I'm Rafiki, your friendly IT assistant for MOHI.\n\nI'm currently in **limited mode**, but I can still help guide you! Here are some quick options:\n\n\u2022 **IT Office Location** - Our team is at Pangani (Ext 303/304)\n\u2022 **Portal Issues** - Contact IT for password resets\n\u2022 **Leave Applications** - Use Employee > Leave in the portal\n\nFor complex technical issues, please contact the IT department directly. May God bless your work today! \ud83d\ude4f"
+      }
     },
     {
       "name": "IT Office Location Query",
       "endpoint": "api/chat",
       "method": "POST",
       "expected_status": 200,
-      "actual_status": 404,
-      "success": false,
-      "response_time": 0.142695,
-      "error": null
+      "actual_status": 200,
+      "success": true,
+      "response_time": 0.00154,
+      "error": null,
+      "response_data": {
+        "response": "The **MOHI IT Office** is located at the **Pangani Head Office**. \n\n**Contact Information:**\n- \ud83d\udcde Extension: **303** or **304**\n- \ud83d\udccd Location: Pangani Head Office, Nairobi\n\nFeel free to reach out during working hours (8:00 AM - 5:00 PM). God bless! \ud83d\ude4f"
+      }
     },
     {
       "name": "Portal Lockout Help",
       "endpoint": "api/chat",
       "method": "POST",
       "expected_status": 200,
-      "actual_status": 404,
-      "success": false,
-      "response_time": 0.097472,
-      "error": null
+      "actual_status": 200,
+      "success": true,
+      "response_time": 0.001148,
+      "error": null,
+      "response_data": {
+        "response": "I'm sorry to hear you're locked out of your portal! Here's how to get help:\n\n**Steps to Resolve Portal Lockout:**\n1. Contact the IT department at **Extension 303 or 304**\n2. Provide your **Staff ID** and **Username**\n3. Wait for password reset (usually within 30 minutes)\n\n**Tip:** While waiting, you can verify your internet connection is stable.\n\nDon't worry, we'll get you back in quickly! \ud83d\udd11"
+      }
     },
     {
       "name": "Leave Application Steps",
       "endpoint": "api/chat",
       "method": "POST",
       "expected_status": 200,
-      "actual_status": 404,
-      "success": false,
-      "response_time": 0.101114,
-      "error": null
+      "actual_status": 200,
+      "success": true,
+      "response_time": 0.000926,
+      "error": null,
+      "response_data": {
+        "response": "Here's how to apply for leave through the MOHI Portal:\n\n**Steps to Apply for Leave:**\n1. Log into the **MOHI Staff Portal**\n2. Navigate to **Employee** > **Leave Application**\n3. Select the **Leave Type** (Annual, Sick, etc.)\n4. Enter your **Start Date** and **End Date**\n5. Add any required **Supporting Documents**\n6. Click **Submit** and wait for supervisor approval\n\nNeed help? Contact HR at the Pangani office. \ud83d\udcdd"
+      }
     },
     {
       "name": "Empty Message Handling",
       "endpoint": "api/chat",
       "method": "POST",
       "expected_status": 200,
-      "actual_status": 404,
-      "success": false,
-      "response_time": 0.102452,
-      "error": null
+      "actual_status": 200,
+      "success": true,
+      "response_time": 0.001145,
+      "error": null,
+      "response_data": {
+        "response": "Thank you for reaching out! I'm Rafiki, your friendly IT assistant for MOHI.\n\nI'm currently in **limited mode**, but I can still help guide you! Here are some quick options:\n\n\u2022 **IT Office Location** - Our team is at Pangani (Ext 303/304)\n\u2022 **Portal Issues** - Contact IT for password resets\n\u2022 **Leave Applications** - Use Employee > Leave in the portal\n\nFor complex technical issues, please contact the IT department directly. May God bless your work today! \ud83d\ude4f"
+      }
     },
     {
       "name": "Invalid Endpoint",
@@ -91,19 +119,11 @@
       "expected_status": 404,
       "actual_status": 404,
       "success": true,
-      "response_time": 0.140441,
+      "response_time": 0.000891,
       "error": null,
-      "response_data": "404 page not found\n"
-    },
-    {
-      "name": "Invalid Endpoint",
-      "endpoint": "api/invalid",
-      "method": "GET",
-      "expected_status": 404,
-      "actual_status": null,
-      "success": false,
-      "response_time": null,
-      "error": "Extra data: line 1 column 5 (char 4)"
+      "response_data": {
+        "detail": "Not Found"
+      }
     }
   ]
 }
