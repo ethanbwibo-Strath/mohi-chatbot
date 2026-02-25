@@ -66,7 +66,7 @@ The system is built on a modular "Engine" that separates knowledge storage from 
 
 # 🤖 Rafiki IT: Missions of Hope International (MOHI) Support Chatbot
 
-[cite_start]**Rafiki IT** is an intelligent Retrieval-Augmented Generation (RAG) assistant designed to provide empathic, accurate, and mission-aligned technical support to MOHI staff[cite: 4, 8]. [cite_start]It serves as a 24/7 technical bridge, grounding responses in official MOHI manuals while maintaining a "Christ-centered" approach of grace and holistic ministry[cite: 8, 33].
+**Rafiki IT** is an intelligent Retrieval-Augmented Generation (RAG) assistant designed to provide empathic, accurate, and mission-aligned technical support to MOHI staff. It serves as a 24/7 technical bridge, grounding responses in official MOHI manuals while maintaining a "Christ-centered" approach of grace and holistic ministry.
 
 ---
 
@@ -77,20 +77,20 @@ The system utilizes a decoupled **Headless Architecture**, where a custom Python
 
 ### Tech Stack:
 * **Backend:** FastAPI (Python 3.13)
-* [cite_start]**Orchestration:** LangChain (RAG Implementation) [cite: 16, 25]
-* [cite_start]**Vector Database:** ChromaDB (Local storage for data privacy) [cite: 16, 39]
-* [cite_start]**Embeddings:** OpenAI `text-embedding-3-small` [cite: 16]
-* [cite_start]**LLM:** GPT-4o-mini (Pay-as-you-go API model) [cite: 40]
+* **Orchestration:** LangChain (RAG Implementation)
+* **Vector Database:** ChromaDB (Local storage for data privacy)
+* **Embeddings:** OpenAI `text-embedding-3-small` 
+* **LLM:** GPT-4o-mini (Pay-as-you-go API model)
 * **Frontend:** React (Tailwind CSS, Lucide Icons, React-Markdown)
 
 ---
 
 ## ✨ Key Features
 * **Empathic Support:** Custom directives ensure Rafiki acknowledges user well-being (e.g., stress or illness) before technical troubleshooting.
-* [cite_start]**Conversational Memory:** Remembers context to assist with multi-step technical workflows (e.g., portal navigation)[cite: 28, 29].
+* **Conversational Memory:** Remembers context to assist with multi-step technical workflows (e.g., portal navigation).
 * **Branded Interface:** Custom UI featuring MOHI brand colors (#1c3c54, #4595d1, #8bc53f) and an adaptive Light/Dark mode.
 * **Quick Actions:** One-tap access for common queries like **IT Office Location**, **Portal Lockouts**, and **Leave Applications**.
-* [cite_start]**Local Privacy:** Internal manuals (I.T. Policy, Mission & Values) are indexed locally and never used to train public models[cite: 39, 46].
+* **Local Privacy:** Internal manuals (I.T. Policy, Mission & Values) are indexed locally and never used to train public models.
 
 ---
 
@@ -131,7 +131,7 @@ npm run build
 - [x] High-fidelity React Frontend with Dark Mode.
 - [x] Floating Chat Widget for seamless portal integration.
 - [ ] Automated ticket creation for the Pangani IT Helpdesk.
-- [ ] [cite_start]Multi-lingual support (Swahili/English)[cite: 49].
+- [x] Multi-lingual support (Swahili/English).
 
 ---
-[cite_start]**Developed by Ethan Bwibo** *IT Intern @ Missions of Hope International (MOHI)* [cite: 3]
+**Developed by Ethan Bwibo** *IT Intern @ Missions of Hope International (MOHI)*
