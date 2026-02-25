@@ -5,7 +5,7 @@
     "critical_bugs": [
       {
         "endpoint": "/api/chat",
-        "issue": "Returns 503 'Unable to connect to the chatbot service' - backend is trying to proxy to http://127.0.0.1:8000/chat but that service is not running",
+        "issue": "Returns 503 'Unable to connect to the chatbot service' - backend is trying to proxy to http://127.0.0.1:8080/chat but that service is not running",
         "impact": "Blocks all chat functionality - no AI responses possible",
         "fix_priority": "CRITICAL"
       },
@@ -56,7 +56,7 @@
     "/app/test_reports/backend_api_results.json"
   ],
 
-  "action_item_for_main_agent": "1) Critical: Set up or connect to the underlying chatbot service that should run on port 8000, or update the backend to use a different chatbot integration method. 2) High: Fix external preview URL accessibility issue - may require infrastructure/deployment configuration. 3) Medium: Install missing langchain_openai dependency if planning to use direct chatbot integration instead of proxy mode.",
+  "action_item_for_main_agent": "1) Critical: Set up or connect to the underlying chatbot service that should run on port 8080, or update the backend to use a different chatbot integration method. 2) High: Fix external preview URL accessibility issue - may require infrastructure/deployment configuration. 3) Medium: Install missing langchain_openai dependency if planning to use direct chatbot integration instead of proxy mode.",
 
   "updated_files": [
     "/app/backend_test.py"

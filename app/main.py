@@ -1,8 +1,17 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from app.services.chatbot import get_rafiki_answer
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="MOHI Rafiki IT Chatbot")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # For production, replace with ['https://portal.mohi.org']
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Define the request model ONLY ONCE
 class ChatRequest(BaseModel):

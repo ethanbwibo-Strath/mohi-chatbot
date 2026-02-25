@@ -135,7 +135,7 @@ function App() {
     setHistory(updatedHistory);
 
     try {
-      const response = await fetch(`${BACKEND_URL}/api/chat`, {
+      const response = await fetch(`${BACKEND_URL}/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -200,7 +200,7 @@ function App() {
             className="w-24 h-24 mx-auto mb-6 object-contain"
           />
           <h1 className="text-3xl font-bold mb-2">MISSIONS OF HOPE INTERNATIONAL</h1>
-          <p className="font-caveat text-2xl text-mohi-green mb-8">Staff Portal</p>
+          <p className="font-caveat text-2xl text-mohi-green mb-8">IT Support</p>
           <div className={`p-6 rounded-xl ${isDark ? 'bg-mohi-dark-surface border border-gray-700' : 'bg-white shadow-lg'}`}>
             <p className="mb-4">
               Welcome to the MOHI Staff Portal. Click the green chat button in the bottom right corner to get IT support from <span className="font-semibold text-mohi-green">Rafiki</span>, your friendly IT assistant.
