@@ -1,4 +1,4 @@
-# 🤖 Rafiki IT: Missions of Hope International (MOHI) Support Chatbot
+<!-- # 🤖 Rafiki IT: Missions of Hope International (MOHI) Support Chatbot
 
 **Rafiki IT** is a Retrieval-Augmented Generation (RAG) assistant designed to provide empathic, accurate, and mission-aligned technical support to MOHI staff. It leverages internal documentation to answer queries regarding I.T. policies, portal navigation, and office procedures.
 
@@ -62,4 +62,76 @@ The system is built on a modular "Engine" that separates knowledge storage from 
 - [ ] Automated ticket creation for the Pangani IT Helpdesk.
 
 ---
-**Developed by Ethan Bwibo** *IT Intern @ Missions of Hope International (MOHI)*
+**Developed by Ethan Bwibo** *IT Intern @ Missions of Hope International (MOHI)* -->
+
+# 🤖 Rafiki IT: Missions of Hope International (MOHI) Support Chatbot
+
+[cite_start]**Rafiki IT** is an intelligent Retrieval-Augmented Generation (RAG) assistant designed to provide empathic, accurate, and mission-aligned technical support to MOHI staff[cite: 4, 8]. [cite_start]It serves as a 24/7 technical bridge, grounding responses in official MOHI manuals while maintaining a "Christ-centered" approach of grace and holistic ministry[cite: 8, 33].
+
+---
+
+## 🚀 The Architecture
+The system utilizes a decoupled **Headless Architecture**, where a custom Python backend (The Brain) serves a modern web interface (The Face) via a REST API.
+
+
+
+### Tech Stack:
+* **Backend:** FastAPI (Python 3.13)
+* [cite_start]**Orchestration:** LangChain (RAG Implementation) [cite: 16, 25]
+* [cite_start]**Vector Database:** ChromaDB (Local storage for data privacy) [cite: 16, 39]
+* [cite_start]**Embeddings:** OpenAI `text-embedding-3-small` [cite: 16]
+* [cite_start]**LLM:** GPT-4o-mini (Pay-as-you-go API model) [cite: 40]
+* **Frontend:** React (Tailwind CSS, Lucide Icons, React-Markdown)
+
+---
+
+## ✨ Key Features
+* **Empathic Support:** Custom directives ensure Rafiki acknowledges user well-being (e.g., stress or illness) before technical troubleshooting.
+* [cite_start]**Conversational Memory:** Remembers context to assist with multi-step technical workflows (e.g., portal navigation)[cite: 28, 29].
+* **Branded Interface:** Custom UI featuring MOHI brand colors (#1c3c54, #4595d1, #8bc53f) and an adaptive Light/Dark mode.
+* **Quick Actions:** One-tap access for common queries like **IT Office Location**, **Portal Lockouts**, and **Leave Applications**.
+* [cite_start]**Local Privacy:** Internal manuals (I.T. Policy, Mission & Values) are indexed locally and never used to train public models[cite: 39, 46].
+
+---
+
+## 🛠️ Installation & Setup
+
+### 1. Backend Setup
+```bash
+git clone [https://github.com/ethanbwibo-Strath/mohi-chatbot.git](https://github.com/ethanbwibo-Strath/mohi-chatbot.git)
+cd mohi-chatbot
+py -3.13 -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### 2. Frontend Setup
+```bash
+cd frontend
+npm install
+npm run build
+```
+
+### 3. Execution
+* **Start Brain:** `uvicorn app.main:app --host 127.0.0.1 --port 8080 --reload`
+* **Start Face:** `npm start` (or serve the `build/` folder via the MOHI portal)
+
+---
+
+## 📂 Project Structure
+* `/app/services/knowledge.py`: Document ingestion, chunking, and vectorization.
+* `/app/services/chatbot.py`: RAG logic and Christ-centered personality directives.
+* `/app/main.py`: FastAPI REST endpoints and CORS configuration.
+* `/frontend/src/App.js`: React chat interface, FAB widget, and theme logic.
+* `/data`: Official MOHI documentation (PDF/Docx).
+
+---
+
+## 💡 Future Roadmap
+- [x] High-fidelity React Frontend with Dark Mode.
+- [x] Floating Chat Widget for seamless portal integration.
+- [ ] Automated ticket creation for the Pangani IT Helpdesk.
+- [ ] [cite_start]Multi-lingual support (Swahili/English)[cite: 49].
+
+---
+[cite_start]**Developed by Ethan Bwibo** *IT Intern @ Missions of Hope International (MOHI)* [cite: 3]
