@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Send, Sun, Moon, MapPin, Lock, FileText, ChevronDown } from 'lucide-react';
+import { MessageCircle, X, Send, Sun, Moon, MapPin, Lock, FileText, ThumbsUp, ThumbsDown, ChevronDown } from 'lucide-react';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 const MOHI_LOGO = 'https://mohiit.org/static/images/inventorylogo.png';
@@ -26,6 +26,14 @@ const QUICK_ACTIONS = [
   }
 ];
 
+// Feedback reasons for thumbs down
+const FEEDBACK_REASONS = [
+  { id: 'confused', label: 'Still confused' },
+  { id: 'more-detail', label: 'Need more detail' },
+  { id: 'wrong', label: 'Wrong answer' },
+  { id: 'human', label: 'Need human help' }
+];
+
 // Typing indicator component
 const TypingIndicator = () => (
   <div className="flex items-center space-x-1 px-4 py-3 bg-mohi-deep-blue rounded-2xl rounded-bl-md max-w-[80px]">
@@ -35,10 +43,96 @@ const TypingIndicator = () => (
   </div>
 );
 
+// Feedback component for assistant messages
+const FeedbackButtons = ({ messageIndex, feedback, onFeedback, isDark }) => {
+  const [showReasons, setShowReasons] = useState(false);
+  const currentFeedback = feedback[messageIndex];
+
+  const handleThumbsUp = () => {
+    onFeedback(messageIndex, { type: 'positive', reason: null });
+  };
+
+  const handleThumbsDown = () => {
+    setShowReasons(true);
+  };
+
+  const handleReasonSelect = (reason) => {
+    onFeedback(messageIndex, { type: 'negative', reason: reason });
+    setShowReasons(false);
+  };
+
+  // Already submitted feedback
+  if (currentFeedback) {
+    return (
+      <div className={`flex items-center gap-2 mt-2 text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+        {currentFeedback.type === 'positive' ? (
+          <span className="flex items-center gap-1 text-mohi-green">
+            <ThumbsUp size={12} fill="currentColor" /> Thanks for the feedback!
+          </span>
+        ) : (
+          <span className="flex items-center gap-1 text-orange-500">
+            <ThumbsDown size={12} fill="currentColor" /> {FEEDBACK_REASONS.find(r => r.id === currentFeedback.reason)?.label || 'Feedback noted'}
+          </span>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-2">
+      {!showReasons ? (
+        <div className="flex items-center gap-2">
+          <span className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>Was this helpful?</span>
+          <button
+            onClick={handleThumbsUp}
+            className={`p-1.5 rounded-full transition-all hover:scale-110 ${
+              isDark ? 'hover:bg-gray-700 text-gray-400 hover:text-mohi-green' : 'hover:bg-gray-200 text-gray-400 hover:text-mohi-green'
+            }`}
+            data-testid={`feedback-thumbsup-${messageIndex}`}
+            aria-label="Helpful"
+          >
+            <ThumbsUp size={14} />
+          </button>
+          <button
+            onClick={handleThumbsDown}
+            className={`p-1.5 rounded-full transition-all hover:scale-110 ${
+              isDark ? 'hover:bg-gray-700 text-gray-400 hover:text-orange-500' : 'hover:bg-gray-200 text-gray-400 hover:text-orange-500'
+            }`}
+            data-testid={`feedback-thumbsdown-${messageIndex}`}
+            aria-label="Not helpful"
+          >
+            <ThumbsDown size={14} />
+          </button>
+        </div>
+      ) : (
+        <div className="animate-fade-in" data-testid={`feedback-reasons-${messageIndex}`}>
+          <p className={`text-xs mb-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>What went wrong?</p>
+          <div className="flex flex-wrap gap-1.5">
+            {FEEDBACK_REASONS.map((reason) => (
+              <button
+                key={reason.id}
+                onClick={() => handleReasonSelect(reason.id)}
+                className={`px-2.5 py-1 text-xs rounded-full transition-all ${
+                  isDark
+                    ? 'bg-mohi-dark-surface border border-gray-600 text-gray-300 hover:border-orange-500 hover:text-orange-400'
+                    : 'bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-600 border border-transparent hover:border-orange-200'
+                }`}
+                data-testid={`feedback-reason-${reason.id}`}
+              >
+                {reason.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // Message bubble component
-const MessageBubble = ({ message, isUser, isDark }) => (
+const MessageBubble = ({ message, isUser, isDark, messageIndex, feedback, onFeedback }) => (
   <div
-    className={`message-bubble flex ${isUser ? 'justify-end' : 'justify-start'} mb-3`}
+    className={`message-bubble flex flex-col ${isUser ? 'items-end' : 'items-start'} mb-3`}
     data-testid={`message-bubble-${isUser ? 'user' : 'assistant'}`}
   >
     <div
@@ -52,6 +146,16 @@ const MessageBubble = ({ message, isUser, isDark }) => (
     >
       <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
     </div>
+    
+    {/* Feedback buttons for assistant messages */}
+    {!isUser && (
+      <FeedbackButtons
+        messageIndex={messageIndex}
+        feedback={feedback}
+        onFeedback={onFeedback}
+        isDark={isDark}
+      />
+    )}
   </div>
 );
 
@@ -81,6 +185,7 @@ function App() {
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [history, setHistory] = useState([]);
+  const [feedback, setFeedback] = useState({}); // Track feedback by message index
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -120,6 +225,33 @@ function App() {
       setTimeout(() => inputRef.current?.focus(), 300);
     }
   }, [isOpen]);
+
+  // Handle feedback submission
+  const handleFeedback = async (messageIndex, feedbackData) => {
+    // Store feedback locally
+    setFeedback(prev => ({
+      ...prev,
+      [messageIndex]: feedbackData
+    }));
+
+    // Send feedback to backend (optional - for analytics)
+    try {
+      await fetch(`${BACKEND_URL}/api/feedback`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messageIndex,
+          messageContent: messages[messageIndex]?.content,
+          feedbackType: feedbackData.type,
+          feedbackReason: feedbackData.reason,
+          timestamp: new Date().toISOString()
+        })
+      });
+    } catch (error) {
+      // Silently fail - feedback is still stored locally
+      console.log('Feedback logged locally');
+    }
+  };
 
   // Send message to backend
   const sendMessage = async (messageText) => {
@@ -315,6 +447,9 @@ function App() {
                 message={msg}
                 isUser={msg.role === 'user'}
                 isDark={isDark}
+                messageIndex={index}
+                feedback={feedback}
+                onFeedback={handleFeedback}
               />
             ))}
 
