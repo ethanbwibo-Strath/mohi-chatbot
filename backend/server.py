@@ -144,6 +144,17 @@ class HealthResponse(BaseModel):
     service: str
     chatbot_mode: str
 
+class FeedbackRequest(BaseModel):
+    messageIndex: int
+    messageContent: Optional[str] = None
+    feedbackType: str  # 'positive' or 'negative'
+    feedbackReason: Optional[str] = None  # 'confused', 'more-detail', 'wrong', 'human'
+    timestamp: str
+
+class FeedbackResponse(BaseModel):
+    success: bool
+    message: str
+
 @app.get("/", response_model=HealthResponse)
 async def health_check():
     """Health check endpoint"""
