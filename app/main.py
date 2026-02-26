@@ -1,9 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-<<<<<<< HEAD
 from typing import List, Optional
-=======
->>>>>>> 9f5c975420482077495e15ecb4b6ebdadc290577
 from app.services.chatbot import get_rafiki_answer
 from fastapi.middleware.cors import CORSMiddleware
 
